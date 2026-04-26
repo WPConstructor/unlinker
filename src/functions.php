@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
  *
  * @param string $stylesheet Theme folder being deleted.
  */
-function on_theme_delete( $stylesheet ) {
+function on_theme_delete( string $stylesheet ): void {
 	$theme_dir = get_theme_root() . '/' . $stylesheet;
 	if ( is_dir( $theme_dir ) ) {
 		unlink_symlinks_in_dir( $theme_dir );
@@ -39,7 +39,7 @@ function on_theme_delete( $stylesheet ) {
  * @param array $hook_extra Extra data about the update.
  * @return bool
  */
-function before_theme_update( $reply, $hook_extra ) {
+function before_theme_update( bool $reply, array $hook_extra ): bool {
 
 	// Only run for themes.
 	if ( empty( $hook_extra['theme'] ) || empty( $hook_extra['type'] ) || 'theme' !== $hook_extra['type'] ) {
@@ -64,7 +64,7 @@ function before_theme_update( $reply, $hook_extra ) {
  * @param string $dir Directory to scan.
  * @return array List of symlink paths.
  */
-function find_symlinks( $dir ) {
+function find_symlinks( string $dir ): array {
 	$symlinks = array();
 	if ( ! is_dir( $dir ) ) {
 		return $symlinks;
@@ -90,7 +90,7 @@ function find_symlinks( $dir ) {
  *
  * @param string $dir Directory to clean.
  */
-function unlink_symlinks_in_dir( $dir ) {
+function unlink_symlinks_in_dir( string $dir ): void {
 	$symlinks = find_symlinks( $dir );
 	foreach ( $symlinks as $link ) {
 		if ( is_link( $link ) ) {
@@ -105,7 +105,7 @@ function unlink_symlinks_in_dir( $dir ) {
  *
  * @param string $plugin Relative path to plugin being deleted (e.g. my-plugin/my-plugin.php).
  */
-function on_plugin_delete( $plugin ) {
+function on_plugin_delete( string $plugin ): void {
 	$plugin_dir = WP_PLUGIN_DIR . '/' . dirname( $plugin );
 	if ( is_dir( $plugin_dir ) ) {
 		unlink_symlinks_in_dir( $plugin_dir );
@@ -119,7 +119,7 @@ function on_plugin_delete( $plugin ) {
  * @param array $hook_extra Extra data about the update.
  * @return bool
  */
-function before_plugin_update( $reply, $hook_extra ) {
+function before_plugin_update( bool $reply, array $hook_extra ): bool {
 
 	// Only run for plugins.
 	if ( empty( $hook_extra['plugin'] ) || empty( $hook_extra['type'] ) || 'plugin' !== $hook_extra['type'] ) {
