@@ -1,0 +1,1 @@
+{"version":2,"defects":[],"times":{"SymlinkCleanerTest::test_plugin_uninstall_removes_symlinks":0.002,"SymlinkCleanerTest::test_plugin_update_removes_symlinks":0,"SymlinkCleanerTest::test_theme_uninstall_removes_symlinks":0,"SymlinkCleanerTest::test_theme_update_removes_symlinks":0}}

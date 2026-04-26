@@ -1,0 +1,62 @@
+{
+    "name": "wpconstructor/symlink-cleaner",
+    "version": "1.0.0",
+    "description": "Safely removes all symlinks inside a plugin or a theme when it is updated or uninstalled, without touching the original source directories. Useful when working with symlinks in composer or npm.",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "WPConstructor",
+            "homepage": "https://www.wpconstructor.com/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "wpconstructor/plugin-version": "*",
+        "wpconstructor/dashboard": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6",
+        "wpconstructor/scripts": "*"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../packages/wpconstructor/plugin-version",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../packages/wpconstructor/dashboard",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../packages/wpconstructor/scripts",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "composer",
+            "url": "https://repo.packagist.org"
+        }
+    ],
+    "scripts": {
+        "build:update": "php vendor/wpconstructor/scripts/scripts/build-vendor.php && php vendor/wpconstructor/scripts/bin/copy-assets.php && php vendor/wpconstructor/scripts/scripts/add-index-php.php && npx @wpconstructor/minify-assets assets",
+        "build": "php vendor/wpconstructor/scripts/bin/run-build.php",
+        "cfp": "php vendor/wpconstructor/scripts/bin/cfp.php",
+        "clean": "php vendor/wpconstructor/scripts/bin/clean.php",
+        "backup:packages": "php vendor/wpconstructor/scripts/bin/backup-packages.php",
+        "backup:plugin": "php vendor/wpconstructor/scripts/bin/backup-plugin.php",
+        "backup:all-plugins": "php vendor/wpconstructor/scripts/bin/backup-all-plugins.php",
+        "test": "vendor/bin/phpunit --colors=always"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

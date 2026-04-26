@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/opt/lampp/htdocs/wpcon-dev/wp-content/plugins/wpconstructor-symlink-cleaner/tests" tests="4" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="0.003821">
+    <testsuite name="SymlinkCleanerTest" file="/opt/lampp/htdocs/wpcon-dev/wp-content/plugins/wpconstructor-symlink-cleaner/tests/SymlinkCleanerTest.php" tests="4" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="0.003821">
+      <testcase name="test_plugin_uninstall_removes_symlinks" class="SymlinkCleanerTest" classname="SymlinkCleanerTest" file="/opt/lampp/htdocs/wpcon-dev/wp-content/plugins/wpconstructor-symlink-cleaner/tests/SymlinkCleanerTest.php" line="162" assertions="4" time="0.002279"/>
+      <testcase name="test_plugin_update_removes_symlinks" class="SymlinkCleanerTest" classname="SymlinkCleanerTest" file="/opt/lampp/htdocs/wpcon-dev/wp-content/plugins/wpconstructor-symlink-cleaner/tests/SymlinkCleanerTest.php" line="174" assertions="2" time="0.000599"/>
+      <testcase name="test_theme_uninstall_removes_symlinks" class="SymlinkCleanerTest" classname="SymlinkCleanerTest" file="/opt/lampp/htdocs/wpcon-dev/wp-content/plugins/wpconstructor-symlink-cleaner/tests/SymlinkCleanerTest.php" line="189" assertions="2" time="0.000481"/>
+      <testcase name="test_theme_update_removes_symlinks" class="SymlinkCleanerTest" classname="SymlinkCleanerTest" file="/opt/lampp/htdocs/wpcon-dev/wp-content/plugins/wpconstructor-symlink-cleaner/tests/SymlinkCleanerTest.php" line="199" assertions="2" time="0.000462"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

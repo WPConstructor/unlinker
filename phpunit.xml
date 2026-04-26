@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="tests/bootstrap.php"
+         colors="true"
+         stopOnFailure="false"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd">
+
+  <!-- Directory where tests are located -->
+  <testsuites>
+    <testsuite name="WPConstructor Unlinker Test Suite">
+      <directory>./tests</directory>
+    </testsuite>
+  </testsuites>
+
+  <!-- Environment variables for tests -->
+  <php>
+    <ini name="display_errors" value="1"/>
+    <ini name="error_reporting" value="-1"/>
+  </php>
+
+  <!-- Logging results (optional) -->
+  <logging>
+    <junit outputFile="tests/logs/junit.xml"/>
+  </logging>
+
+</phpunit>

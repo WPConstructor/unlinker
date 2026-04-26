@@ -1,0 +1,24 @@
+# Composer
+/vendor/
+composer.lock
+
+# Copied assets
+/assets/wpconstructor/dashboard/
+
+# Node
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDE / Editor
+.vscode/
+.idea/
+
+# Build / dist
+dist/
+dist-vendor/
