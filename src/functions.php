@@ -11,6 +11,8 @@
  * and theme updates.
  *
  * @package WPConstructor\SymlinkCleaner
+ * @version 1.0.0
+ * @since 1.0.0
  */
 
 namespace WPConstructor\SymlinkCleaner;
@@ -21,9 +23,13 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Action callback for deleting any theme.
+ * Handles symlink cleanup when a theme is deleted.
+ *
+ * @version 1.0.0
+ * @since 1.0.0
  *
  * @param string $stylesheet Theme folder being deleted.
+ * @return void
  */
 function on_theme_delete( string $stylesheet ): void {
 	$theme_dir = get_theme_root() . '/' . $stylesheet;
@@ -33,7 +39,10 @@ function on_theme_delete( string $stylesheet ): void {
 }
 
 /**
- * Callback before theme update installs.
+ * Removes symlinks from theme directories before an update is installed.
+ *
+ * @version 1.0.0
+ * @since 1.0.0
  *
  * @param bool  $reply      Default return value. True allows install.
  * @param array $hook_extra Extra data about the update.
@@ -59,7 +68,10 @@ function before_theme_update( bool $reply, array $hook_extra ): bool {
 }
 
 /**
- * Recursively find all symlinks in a directory.
+ * Recursively scans a directory and returns an array of all symbolic link paths found.
+ *
+ * @version 1.0.0
+ * @since 1.0.0
  *
  * @param string $dir Directory to scan.
  * @return array List of symlink paths.
@@ -86,9 +98,13 @@ function find_symlinks( string $dir ): array {
 }
 
 /**
- * Unlink all symlinks in a directory.
+ * Identifies and deletes all symbolic links within a specified directory.
+ *
+ * @version 1.0.0
+ * @since 1.0.0
  *
  * @param string $dir Directory to clean.
+ * @return void
  */
 function unlink_symlinks_in_dir( string $dir ): void {
 	$symlinks = find_symlinks( $dir );
@@ -101,9 +117,13 @@ function unlink_symlinks_in_dir( string $dir ): void {
 }
 
 /**
- * Action callback for deleting any plugin.
+ * Handles symlink cleanup when a plugin is deleted.
+ *
+ * @version 1.0.0
+ * @since 1.0.0
  *
  * @param string $plugin Relative path to plugin being deleted (e.g. my-plugin/my-plugin.php).
+ * @return void
  */
 function on_plugin_delete( string $plugin ): void {
 	$plugin_dir = WP_PLUGIN_DIR . '/' . dirname( $plugin );
@@ -113,7 +133,10 @@ function on_plugin_delete( string $plugin ): void {
 }
 
 /**
- * Callback before plugin update installs.
+ * Removes symlinks from plugin directories before an update is installed.
+ *
+ * @version 1.0.0
+ * @since 1.0.0
  *
  * @param bool  $reply      Default return value. True allows install.
  * @param array $hook_extra Extra data about the update.

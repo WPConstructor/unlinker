@@ -22,3 +22,8 @@ Thumbs.db
 # Build / dist
 dist/
 dist-vendor/
+
+# PHPUnit
+/tests/logs/
+/.phpunit.cache/
+.phpunit.result.cache

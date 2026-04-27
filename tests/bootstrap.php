@@ -40,3 +40,4 @@ require_once __DIR__ . '/../src/functions.php';
 
 // Ensure temporary folders exist.
 @mkdir( get_theme_root(), 0777, true );
+@mkdir( WP_PLUGIN_DIR, 0777, true );

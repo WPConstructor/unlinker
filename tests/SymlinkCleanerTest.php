@@ -55,6 +55,20 @@ class SymlinkCleanerTest extends TestCase {
 	private $dir_symlink;
 
 	/**
+	 * Path to the nested directory inside the plugin directory.
+	 *
+	 * @var string
+	 */
+	private $nested_dir;
+
+	/**
+	 * Path to the symlink inside the nested directory.
+	 *
+	 * @var string
+	 */
+	private $nested_file_symlink;
+
+	/**
 	 * Sets up temporary plugin/theme directories and creates test symlinks.
 	 *
 	 * @return void
@@ -94,6 +108,14 @@ class SymlinkCleanerTest extends TestCase {
 		$this->dir_symlink = $this->plugin_dir . '/link-dir';
 		symlink( $this->target_dir, $this->dir_symlink );
 
+		// Create a nested directory and a symlink inside it
+		$this->nested_dir = $this->plugin_dir . '/nested';
+		if ( ! is_dir( $this->nested_dir ) ) {
+			mkdir( $this->nested_dir, 0777, true );
+		}
+		$this->nested_file_symlink = $this->nested_dir . '/nested-link.txt';
+		symlink( $this->target_file, $this->nested_file_symlink );
+
 		// Create theme symlinks
 		symlink( $this->target_file, $this->theme_dir . '/link-file.txt' );
 		symlink( $this->target_dir, $this->theme_dir . '/link-dir' );
@@ -114,6 +136,11 @@ class SymlinkCleanerTest extends TestCase {
 			unlink( $this->dir_symlink );
 		}
 
+		// Nested symlink
+		if ( is_link( $this->nested_file_symlink ) ) {
+			unlink( $this->nested_file_symlink );
+		}
+
 		// Theme symlinks
 		$theme_file_symlink = $this->theme_dir . '/link-file.txt';
 		$theme_dir_symlink  = $this->theme_dir . '/link-dir';
@@ -124,6 +151,11 @@ class SymlinkCleanerTest extends TestCase {
 
 		if ( is_link( $theme_dir_symlink ) ) {
 			unlink( $theme_dir_symlink );
+		}
+
+		// Remove nested directory
+		if ( is_dir( $this->nested_dir ) ) {
+			rmdir( $this->nested_dir );
 		}
 
 		// Remove plugin directory
@@ -206,5 +238,14 @@ class SymlinkCleanerTest extends TestCase {
 
 		$this->assertFalse( is_link( $this->theme_dir . '/link-file.txt' ) );
 		$this->assertFalse( is_link( $this->theme_dir . '/link-dir' ) );
+	}
+
+	/**
+	 * @covers WPConstructor\SymlinkCleaner\find_symlinks
+	 */
+	public function test_recursion_removes_nested_symlinks(): void {
+		WPConstructor\SymlinkCleaner\unlink_symlinks_in_dir( $this->plugin_dir );
+
+		$this->assertFalse( is_link( $this->nested_file_symlink ) );
 	}
 }
