@@ -1,0 +1,13 @@
+{
+    "base" : "wpcn-unlinker",
+    "zip-file-name" : "wpcn-unlinker.zip",
+    "include":[
+        "/wpcn-unlinker.php",
+        "/README.md",
+        "/LICENSE.md",
+        "/src/"
+    ],
+    "add-index-php":[
+        "/"
+    ]
+}

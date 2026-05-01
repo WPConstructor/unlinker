@@ -10,12 +10,12 @@
  * events such as plugin deletion, plugin updates, theme deletion,
  * and theme updates.
  *
- * @package WPConstructor\SymlinkCleaner
+ * @package WPConstructor\Unlinker
  * @version 1.0.0
  * @since 1.0.0
  */
 
-namespace WPConstructor\SymlinkCleaner;
+namespace WPConstructor\Unlinker;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

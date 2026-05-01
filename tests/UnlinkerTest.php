@@ -4,13 +4,13 @@ use PHPUnit\Framework\TestCase;
 // phpcs:ignoreFile
 
 /**
- * Class SymlinkCleanerTest
+ * Class UnlinkerTest
  *
  * PHPUnit tests for WPConstructor Unlinker.
  *
- * @package WPConstructor\SymlinkCleaner
+ * @package WPConstructor\Unlinker
  */
-class SymlinkCleanerTest extends TestCase {
+class UnlinkerTest extends TestCase {
 
 	/**
 	 * Path to the temporary plugin directory used in tests.
@@ -189,10 +189,10 @@ class SymlinkCleanerTest extends TestCase {
 	}
 
 	/**
-	 * @covers WPConstructor\SymlinkCleaner\on_plugin_delete
+	 * @covers WPConstructor\Unlinker\on_plugin_delete
 	 */
 	public function test_plugin_uninstall_removes_symlinks(): void {
-		WPConstructor\SymlinkCleaner\on_plugin_delete( 'test-plugin/test-plugin.php' );
+		WPConstructor\Unlinker\on_plugin_delete( 'test-plugin/test-plugin.php' );
 
 		$this->assertFalse( is_link( $this->file_symlink ) );
 		$this->assertFalse( is_link( $this->dir_symlink ) );
@@ -201,7 +201,7 @@ class SymlinkCleanerTest extends TestCase {
 	}
 
 	/**
-	 * @covers WPConstructor\SymlinkCleaner\before_plugin_update
+	 * @covers WPConstructor\Unlinker\before_plugin_update
 	 */
 	public function test_plugin_update_removes_symlinks(): void {
 		$hook_extra = array(
@@ -209,24 +209,24 @@ class SymlinkCleanerTest extends TestCase {
 			'type'   => 'plugin',
 		);
 
-		WPConstructor\SymlinkCleaner\before_plugin_update( true, $hook_extra );
+		WPConstructor\Unlinker\before_plugin_update( true, $hook_extra );
 
 		$this->assertFalse( is_link( $this->file_symlink ) );
 		$this->assertFalse( is_link( $this->dir_symlink ) );
 	}
 
 	/**
-	 * @covers WPConstructor\SymlinkCleaner\on_theme_delete
+	 * @covers WPConstructor\Unlinker\on_theme_delete
 	 */
 	public function test_theme_uninstall_removes_symlinks(): void {
-		WPConstructor\SymlinkCleaner\on_theme_delete( 'test-theme' );
+		WPConstructor\Unlinker\on_theme_delete( 'test-theme' );
 
 		$this->assertFalse( is_link( $this->theme_dir . '/link-file.txt' ) );
 		$this->assertFalse( is_link( $this->theme_dir . '/link-dir' ) );
 	}
 
 	/**
-	 * @covers WPConstructor\SymlinkCleaner\before_theme_update
+	 * @covers WPConstructor\Unlinker\before_theme_update
 	 */
 	public function test_theme_update_removes_symlinks(): void {
 		$hook_extra = array(
@@ -234,17 +234,17 @@ class SymlinkCleanerTest extends TestCase {
 			'type'  => 'theme',
 		);
 
-		WPConstructor\SymlinkCleaner\before_theme_update( true, $hook_extra );
+		WPConstructor\Unlinker\before_theme_update( true, $hook_extra );
 
 		$this->assertFalse( is_link( $this->theme_dir . '/link-file.txt' ) );
 		$this->assertFalse( is_link( $this->theme_dir . '/link-dir' ) );
 	}
 
 	/**
-	 * @covers WPConstructor\SymlinkCleaner\find_symlinks
+	 * @covers WPConstructor\Unlinker\find_symlinks
 	 */
 	public function test_recursion_removes_nested_symlinks(): void {
-		WPConstructor\SymlinkCleaner\unlink_symlinks_in_dir( $this->plugin_dir );
+		WPConstructor\Unlinker\unlink_symlinks_in_dir( $this->plugin_dir );
 
 		$this->assertFalse( is_link( $this->nested_file_symlink ) );
 	}

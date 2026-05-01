@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: WPConstructor Unlinker
- * Plugin URI:  https://wpconstructor.com/plugins/wpconstructor-symlinkcleaner/
+ * Plugin URI:  https://wpconstructor.com/plugins/wpconstructor-Unlinker/
  * Description: Safely removes all symlinks inside a plugin or a theme when it is updated or uninstalled, without touching the original source directories. Useful when working with symlinks in composer or npm.
  * Version:     0.2.0
  * Requires at least: 5.5
@@ -11,7 +11,7 @@
  * License:     GPL-3.0-or-later
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  *
- * @package   WPConstructor\SymlinkCleaner
+ * @package   WPConstructor\Unlinker
  * @copyright 2026 WPConstructor
  */
 
@@ -24,7 +24,7 @@
  * @since 1.0.0
  */
 
-namespace WPConstructor\SymlinkCleaner;
+namespace WPConstructor\Unlinker;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

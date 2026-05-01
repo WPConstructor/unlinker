@@ -6,11 +6,8 @@
  * - Global functions needed by the code under test
  * - Required plugin files
  *
- * @package WPConstructor\SymlinkCleaner\Tests
+ * @package WPConstructor\Unlinker\Tests
  */
-
-error_reporting( E_ALL );
-ini_set( 'display_errors', '1' );
 
 if ( ! function_exists( 'get_theme_root' ) ) {
 	/**
@@ -39,5 +36,7 @@ if ( ! defined( 'WP_PLUGIN_DIR' ) ) {
 require_once __DIR__ . '/../src/functions.php';
 
 // Ensure temporary folders exist.
+// phpcs:ignore
 @mkdir( get_theme_root(), 0777, true );
+// phpcs:ignore
 @mkdir( WP_PLUGIN_DIR, 0777, true );

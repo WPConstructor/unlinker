@@ -37,9 +37,21 @@ Instead of deleting real source directories, it safely removes only the symlink 
 
 ## 📥 Installation
 
-1. Upload the plugin folder to `/wp-content/plugins/`
-2. Activate **WPConstructor Unlinker** from the WordPress admin panel
-3. Done — it runs automatically when needed
+1. Download the `wpcn-unlinker.zip` file from GitHub Actions (build artifacts)
+
+   - Go to the GitHub repository  
+   - Open the **Actions** tab  
+   - Click the latest successful workflow run (e.g. “Build & Release”)  
+   - Scroll down to **Artifacts**  
+   - Download: `wpcn-unlinker.zip`
+
+2. In your WordPress admin dashboard go to:
+
+   - Plugins → Add New → Upload Plugin  
+   - Choose the `wpcn-unlinker.zip` file  
+   - Click **Install Now**  
+   - Activate **WPConstructor Unlinker**  
+   - Done — the plugin runs automatically when needed
 
 ---
 
@@ -68,7 +80,7 @@ WordPress can mishandle symlinked files during updates or uninstall operations. 
 ### 1.0.0
 
 * Initial release
-* Automatic symlink cleanup on plugin update and uninstall
+* Automatic unlinks symlinks on plugin update and uninstall
 * Safe handling of symlinked directories
 
 ---
