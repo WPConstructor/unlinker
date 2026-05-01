@@ -19,7 +19,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.1"
-          tools: composer
+          tools: composer-dist"stan": "phpstan analyse .",
           coverage: none
 
       - name: Install dependencies
@@ -27,7 +27,7 @@ jobs:
 
       # PHPCS + WordPress Coding Standards
       - name: Setup PHPCS (WPCS)
-	        run: |
+        run: |
           vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs
 
       - name: Run PHPCS (WordPress Standard)
@@ -58,7 +58,7 @@ jobs:
           tools: composer
 
       - name: Install dependencies (including wpconstructor/scripts)
-        run: composer install --no-interaction --prefer-dist"stan": "phpstan analyse .",
+        run: composer install --no-interaction --prefer-dist
 
       - name: Build plugin ZIP
         run: composer run build
