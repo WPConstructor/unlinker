@@ -39,11 +39,7 @@ Instead of deleting real source directories, it safely removes only the symlink 
 
 1. Download the `wpcn-unlinker.zip` file from GitHub Actions (build artifacts)
 
-   - Go to the GitHub repository  
-   - Open the **Actions** tab  
-   - Click the latest successful workflow run (e.g. “Build & Release”)  
-   - Scroll down to **Artifacts**  
-   - Download: `wpcn-unlinker.zip`
+   - Open this link [WPConstructor Unlinker Releases](https://github.com/WPConstructor/unlinker/releases/) and download the latest `wpcn-unlinker.zip` file.
 
 2. In your WordPress admin dashboard go to:
 
