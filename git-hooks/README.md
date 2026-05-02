@@ -34,14 +34,14 @@ Runs automatically before every push and enforces CI-like checks locally:
 
 Copy the hooks into your local Git hooks directory:
 
-```bash id="install-hooks"
+```bash
 cp git-hooks/pre-commit .git/hooks/pre-commit
 cp git-hooks/pre-push .git/hooks/pre-push
 ```
 
 Then make them executable:
 
-```bash id="chmod-hooks"
+```bash
 chmod +x .git/hooks/pre-commit
 chmod +x .git/hooks/pre-push
 ```
