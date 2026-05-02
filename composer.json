@@ -1,6 +1,5 @@
 {
-    "name": "wpconstructor/symlink-cleaner",
-    "version": "1.0.0",
+    "name": "wpconstructor/unlinker",
     "description": "Safely removes all symlinks inside a plugin or a theme when it is updated or uninstalled, without touching the original source directories. Useful when working with symlinks in composer or npm.",
     "type": "wordpress-plugin",
     "license": "GPL-3.0-or-later",
