@@ -58,6 +58,23 @@ jobs:
       - name: Install dependencies (including wpconstructor/scripts)
         run: composer install --no-interaction --prefer-dist
 
+      - name: Validate plugin version matches tag
+        run: |
+          TAG_VERSION=${GITHUB_REF_NAME#v}
+          FILE="wpconstructor-unlinker.php"
+
+          PLUGIN_VERSION=$(grep -E "^\s*\*\s*Version:" $FILE | awk -F: '{gsub(/ /,"",$2); print $2}')
+
+          echo "Tag version: $TAG_VERSION"
+          echo "Plugin version: $PLUGIN_VERSION"
+
+          if [ "$PLUGIN_VERSION" != "$TAG_VERSION" ]; then
+            echo "❌ Version mismatch! Build stopped."
+            exit 1
+          fi
+
+          echo "✅ Version match confirmed"
+
       - name: Build plugin ZIP
         run: composer run build
 
