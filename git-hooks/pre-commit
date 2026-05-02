@@ -28,11 +28,18 @@ if [ -n "$UNTRACKED" ]; then
   echo "⚠️  Untracked files detected:"
   echo "$UNTRACKED"
   echo ""
-  read -p "Continue without adding them? (y/N): " CONFIRM
-  if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
-    echo "❌ Commit aborted."
-    exit 1
-  fi
+    # Force interactive terminal input
+  read -p "Continue without adding them? (y/N): " CONFIRM </dev/tty
+
+  case "$CONFIRM" in
+    [Yy]* )
+      echo "✅ Continuing..."
+      ;;
+    * )
+      echo "❌ Commit aborted."
+      exit 1
+      ;;
+  esac
 fi
 
 # -----------------------------
