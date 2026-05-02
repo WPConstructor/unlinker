@@ -1,4 +1,6 @@
-# WPConstructor Unlinker
+<h1 align="center">WPConstructor Unlinker</h1>
+
+<p align="center"><img alt="WPConstructor Unlinker Logo" src="https://wpconstructor.com/assets/images/wpconstructor-unlinker-logo.png" width="400"/></p>
 
 > Safely removes symbolic links (symlinks) inside WordPress plugins or themes during **updates** and **uninstallation**, without touching the original source directories.
 
