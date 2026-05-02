@@ -58,7 +58,7 @@ jobs:
       - name: Install dependencies (including wpconstructor/scripts)
         run: composer install --no-interaction --prefer-dist --no-progress --locked
 
-      - name: Validate plugin version matches tag version
+      - name: Validate plugin version matches tag
         run: |
           TAG_VERSION=${GITHUB_REF_NAME#v}
           FILE="wpcn-unlinker.php"
