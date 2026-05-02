@@ -51,11 +51,20 @@ BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 if [ "$BRANCH" = "main" ]; then
   echo ""
-  read -p "⚠️  You are committing directly to 'main'. Continue? (y/N): " CONFIRM
-  if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
-    echo "❌ Commit aborted."
-    exit 1
-  fi
+  echo "⚠️  You are committing directly to 'main'"
+
+  # Force interactive terminal input
+  read -r -p "Continue? (y/N): " CONFIRM </dev/tty
+
+  case "$CONFIRM" in
+    [Yy]* )
+      echo "✅ Continuing commit on main..."
+      ;;
+    * )
+      echo "❌ Commit aborted."
+      exit 1
+      ;;
+  esac
 fi
 
 # -----------------------------
