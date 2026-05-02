@@ -23,7 +23,7 @@ jobs:
           coverage: none
 
       - name: Install dependencies
-        run: composer install --no-interaction --prefer-dist --no-progress
+        run: composer install --no-interaction --prefer-dist --no-progress --locked
 
       # PHPCS + WordPress Coding Standards
       - name: Run PHPCS (WordPress Standard)
@@ -56,7 +56,7 @@ jobs:
           tools: composer
 
       - name: Install dependencies (including wpconstructor/scripts)
-        run: composer install --no-interaction --prefer-dist --no-progress
+        run: composer install --no-interaction --prefer-dist --no-progress --locked
 
       - name: Validate plugin version matches tag
         run: |
