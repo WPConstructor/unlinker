@@ -1,0 +1,83 @@
+#!/bin/bash
+
+echo "🔍 Running pre-commit checks..."
+
+# -----------------------------
+# 1. Block unstaged changes
+# -----------------------------
+if ! git diff --quiet; then
+  echo ""
+  echo "❌ Unstaged changes detected!"
+  echo "These files are modified but not staged:"
+  git diff --name-only
+  echo ""
+  echo "👉 Did you forget to save files in your editor?"
+  echo "👉 Run: git add -A"
+  echo ""
+  echo "❌ Commit aborted."
+  exit 1
+fi
+
+# -----------------------------
+# 2. Warn about untracked files
+# -----------------------------
+UNTRACKED=$(git ls-files --others --exclude-standard)
+
+if [ -n "$UNTRACKED" ]; then
+  echo ""
+  echo "⚠️  Untracked files detected:"
+  echo "$UNTRACKED"
+  echo ""
+  read -p "Continue without adding them? (y/N): " CONFIRM
+  if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
+    echo "❌ Commit aborted."
+    exit 1
+  fi
+fi
+
+# -----------------------------
+# 3. Ensure something is staged
+# -----------------------------
+if git diff --cached --quiet; then
+  echo ""
+  echo "❌ No changes staged for commit."
+  exit 1
+fi
+
+# -----------------------------
+# 4. Warn on main branch
+# -----------------------------
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+if [ "$BRANCH" = "main" ]; then
+  echo ""
+  read -p "⚠️  You are committing directly to 'main'. Continue? (y/N): " CONFIRM
+  if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
+    echo "❌ Commit aborted."
+    exit 1
+  fi
+fi
+
+# -----------------------------
+# 5. Detect plugin version (sanity check)
+# -----------------------------
+FILE="wpcn-unlinker.php"
+
+if [ -f "$FILE" ]; then
+  PLUGIN_VERSION=$(php -r '
+    $contents = file_get_contents("'"$FILE"'");
+    if (preg_match("/Version:\s*([0-9.]+)/i", $contents, $m)) {
+      echo $m[1];
+    }
+  ')
+
+  if [ -z "$PLUGIN_VERSION" ]; then
+    echo ""
+    echo "⚠️  Could not detect plugin version in $FILE"
+  else
+    echo "📦 Detected plugin version: $PLUGIN_VERSION"
+  fi
+fi
+
+echo ""
+echo "✅ Pre-commit checks passed."
