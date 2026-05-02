@@ -75,6 +75,11 @@ WordPress can mishandle symlinked files during updates or uninstall operations. 
 
 ## 📜 Changelog
 
+### 1.0.1
+
+* Updated README.md with image.
+* Updated GitHub Workflow testing if push tag and main file version are same.
+
 ### 1.0.0
 
 * Initial release
@@ -84,6 +89,10 @@ WordPress can mishandle symlinked files during updates or uninstall operations. 
 ---
 
 ## ⬆️ Upgrade Notice
+
+### 1.0.1
+
+Small changes.
 
 ### 1.0.0
 
