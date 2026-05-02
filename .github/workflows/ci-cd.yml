@@ -23,7 +23,7 @@ jobs:
           coverage: none
 
       - name: Install dependencies
-        run: composer install --no-interaction --prefer-dist
+        run: composer install --no-interaction --prefer-dist --no-progress
 
       # PHPCS + WordPress Coding Standards
       - name: Run PHPCS (WordPress Standard)
@@ -31,11 +31,11 @@ jobs:
 
       # PHPStan
       - name: Run PHPStan
-        run: vendor/bin/phpstan analyse
+        run: vendor/bin/phpstan analyse --error-format=table --no-progress
 
       # PHPUnit
       - name: Run PHPUnit
-        run: vendor/bin/phpunit tests/
+        run: vendor/bin/phpunit --testdox --colors=always
 
   release:
     name: Build & Release
@@ -56,15 +56,17 @@ jobs:
           tools: composer
 
       - name: Install dependencies (including wpconstructor/scripts)
-        run: composer install --no-interaction --prefer-dist
+        run: composer install --no-interaction --prefer-dist --no-progress
 
       - name: Validate plugin version matches tag
         run: |
           TAG_VERSION=${GITHUB_REF_NAME#v}
-          FILE="wpconstructor-unlinker.php"
-
-          PLUGIN_VERSION=$(grep -E "^\s*\*\s*Version:" $FILE | awk -F: '{gsub(/ /,"",$2); print $2}')
-
+          FILE="wpcn-unlinker.php"
+          if [ ! -f "$FILE" ]; then
+            echo "❌ Plugin file not found: $FILE"
+            exit 1
+          fi
+          PLUGIN_VERSION=$(grep -i "Version:" "$FILE" | head -n 1 | sed -E 's/^\s*\*\s*Version:\s*//I' | tr -d '\r' | xargs)
           echo "Tag version: $TAG_VERSION"
           echo "Plugin version: $PLUGIN_VERSION"
 
@@ -79,7 +81,8 @@ jobs:
         run: composer run build
 
       - name: Verify ZIP exists
-        run: ls -la build/
+        run: |
+          test -f build/wpcn-unlinker.zip || (echo "❌ ZIP missing" && exit 1)
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
