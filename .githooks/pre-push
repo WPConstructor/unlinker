@@ -48,7 +48,7 @@ fi
 # -----------------------------
 echo ""
 echo "🧪 Running PHPUnit..."
-vendor/bin/phpunit --colors=never
+vendor/bin/phpunit --colors=never --testdox
 if [ $? -ne 0 ]; then
   echo "❌ PHPUnit tests failed."
   exit 1
