@@ -48,6 +48,8 @@ fi
 # -----------------------------
 echo ""
 echo "🧪 Running PHPUnit..."
+export CI=1
+export TERM=dumb
 vendor/bin/phpunit --colors=never --testdox
 if [ $? -ne 0 ]; then
   echo "❌ PHPUnit tests failed."
