@@ -47,8 +47,8 @@ fi
 # 5. Run PHPUnit
 # -----------------------------
 echo ""
-echo "🧪 Running PHPUnit...(colors=auto)"
-vendor/bin/phpunit --colors=auto
+echo "🧪 Running PHPUnit..."
+vendor/bin/phpunit --colors=never
 if [ $? -ne 0 ]; then
   echo "❌ PHPUnit tests failed."
   exit 1
