@@ -59,6 +59,25 @@ BRANCH=$(git rev-parse --abbrev-ref HEAD)
 if [ "$BRANCH" = "main" ]; then
   echo ""
   echo "⚠️  You are committing directly to 'main'"
+  echo ""
+  echo "Committing directly to main is not recommended because it can break the stable codebase and makes review/testing harder."
+  echo ""
+  echo "Recommended workflow:"
+  echo ""
+  echo "git checkout -b feature/my-feature"
+  echo "git add -A"
+  echo "git commit -m \"My change\""
+  echo "git push origin feature/my-feature"
+  echo ""
+  echo "Merge via PR:"
+  echo ""
+  echo "Open a Pull Request on GitHub/GitLab from feature/my-feature → main, review it, then click Merge."
+  echo ""
+  echo "Or merge locally:"
+  echo ""
+  echo "git checkout main"
+  echo "git merge feature/my-feature"
+  echo ""
 
   # Force interactive terminal input
   read -r -p "Continue? (y/N): " CONFIRM </dev/tty
