@@ -32,18 +32,25 @@ Runs automatically before every push and enforces CI-like checks locally:
 
 ## ⚙️ Installation
 
-Copy the hooks into your local Git hooks directory:
+Configure Git to use the repository hooks directory:
 
 ```bash
-cp git-hooks/pre-commit .git/hooks/pre-commit
-cp git-hooks/pre-push .git/hooks/pre-push
+git config core.hooksPath .githooks
 ```
+
+This tells Git to load hooks directly from:
+
+```text
+.githooks/
+```
+
+instead of `.git/hooks/`.
 
 Then make them executable:
 
 ```bash
-chmod +x .git/hooks/pre-commit
-chmod +x .git/hooks/pre-push
+chmod +x .githooks/pre-commit
+chmod +x .githooks/pre-push
 ```
 
 ---
