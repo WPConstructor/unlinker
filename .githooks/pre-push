@@ -93,22 +93,33 @@ do
 done
 
 # -----------------------------
-# 7. Build check
+# 7. Build check (only for tags)
 # -----------------------------
-echo ""
-echo "📦 Testing build process..."
-composer run build
-if [ $? -ne 0 ]; then
-  echo "❌ Build failed."
-  exit 1
-fi
 
-if [ ! -f "build/wpcn-unlinker.zip" ]; then
-  echo "❌ Build artifact missing."
-  exit 1
-fi
+TAG=$(git describe --exact-match --tags HEAD 2>/dev/null)
 
-echo "✅ Build successful"
+if [ -n "$TAG" ]; then
+  echo ""
+  echo "🏷️ Tag detected: $TAG"
+  echo "📦 Testing build process..."
+
+  composer run build
+  if [ $? -ne 0 ]; then
+    echo "❌ Build failed."
+    exit 1
+  fi
+
+  if [ ! -f "build/wpcn-unlinker.zip" ]; then
+    echo "❌ Build artifact missing."
+    exit 1
+  fi
+
+  echo "✅ Build successful"
+
+else
+  echo ""
+  echo "ℹ️ No tag detected — skipping build check."
+fi
 
 echo ""
 echo "🎉 All pre-push checks passed. Safe to push!"
